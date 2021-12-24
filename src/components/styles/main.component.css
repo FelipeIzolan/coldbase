@@ -1,0 +1,106 @@
+.coldbase_main{
+    width: 100%;
+}
+
+@keyframes gradient { 0%{background-position:0 0} 100%{background-position:100% 0} }
+.coldbase_main::after{
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background-position: 0% 0%;
+    background: linear-gradient(to right, #94a4ff, #5771e6, #b8e5ff, #b8e5ff, #5771e6, #94a4ff);
+    background-size: 500% auto;
+    animation: gradient 3s linear infinite;
+}
+
+.coldbase_main_inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coldbase_main_inputs input{
+    box-shadow: 0 0 10px 0 black;
+    padding: 8px;
+    border-radius: 30px;
+    margin: 6px;
+    width: 250px;
+    border: none;
+}
+
+.coldbase_main_buttons{
+    display: flex;
+    border-radius: 8px;
+    border: 1px solid #94a4ff;
+    margin-top: 8px;
+}
+
+.coldbase_main_buttons button{
+    background: none;
+    border: none;
+    padding: 8px 12px 8px 12px;
+    cursor: pointer;
+    color: #94a4ff;
+    transition: 0.2s;
+}
+
+.coldbase_main_buttons button:hover{ background-color:#b8e5ff2f; }
+.coldbase_main_buttons button:active{ background-color:#b8e5ff2f; }
+
+.coldbase_main_buttons button:first-child{
+    border-top-left-radius: 8px;
+    border-end-start-radius: 8px;
+}
+.coldbase_main_buttons button:last-child{
+    border-left: 1px solid #94a4ff;
+    border-top-right-radius: 8px;
+    border-end-end-radius: 8px;
+}
+
+.coldbase_chatbox{
+    display: flex;
+    height: calc(100vh - 100px);
+    color: white;
+}
+
+.coldbase_chatmessages{
+    max-height: calc(100vh - 135px);
+    width: 100%;
+    margin: 0 35px 0 35px;
+    overflow-y: scroll;
+    scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    scrollbar-width: 100px;
+}
+
+.coldbase_chatmessages li{
+    word-wrap: break-word;
+}
+
+.coldbase_chatinput{
+    position: absolute;
+    color: white;
+    margin-bottom: 6px;
+    background: none;
+    border: none;
+    width: calc(100% - 20px);
+    left: 20px;
+    align-self: flex-end;
+}
+
+@keyframes blink{ from{ opacity: 0; } to{ opacity: 1; } }
+.coldbase_chatbox::before{
+    position: absolute;
+    content: ">";
+    margin: 0 0 6px 4px;
+    align-self: flex-end;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    animation: blink 375ms infinite;
+    color: rgb(135, 253, 135);
+}
+
+@media (max-width: 600px) {
+    .coldbase_chatbox{ height: calc(100vh - 100px); }
+}
