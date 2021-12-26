@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { coldbaseContext } from "../scripts/coldbase_context";
 
-import coldbase_leave from "../images/coldbase_leave.png"
 import coldbase_logo from "../images/coldbase_logo.png";
 import "./styles/navbar.component.css";
 
@@ -28,12 +27,12 @@ function Navbar() {
         return (
             <nav className="coldbase_navbar">
                 <label className="coldbase_navbar_logo" style={{ backgroundImage: `url(${coldbase_logo})` }} />
-                <label className="coldbase_navbar_leave" onClick={disconnectRoom} style={{ backgroundImage: `url(${coldbase_leave})` }} />
                 <div className="coldbase_navbar_key">
                     {hide === false ? (<h5><strong>key</strong>: {keyRoom}</h5>) : (<h5><strong>key</strong>: censored</h5>)}
                     <input type="checkbox" onChange={e => setHide(e.target.checked)} />
                     <label>hide?</label>
                 </div>
+                <label className="coldbase_navbar_leave" onClick={disconnectRoom}>X</label>
             </nav >
         )
 

@@ -1,14 +1,14 @@
 const RoomsManager = require("./RoomsManager")
 const createRoomController = require("./controllers/socket.createRoom")
 
-const rooms = new RoomsManager()
+const roomsManager = new RoomsManager()
 class ChatManager {
     constructor(socket, io) {
         this.socket = socket
         this.io = io
-        this.rooms = rooms
+        this.roomsManager = roomsManager
 
-        socket.on("createRoom", data => createRoomController(data, rooms))
+        socket.on("createRoom", data => createRoomController(data, roomsManager, socket))
     }
 }
 

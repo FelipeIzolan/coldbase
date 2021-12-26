@@ -18,7 +18,7 @@ function Main() {
         if (username.length > 25) return toast.error("Username must be up to 25 characters")
         socket.emit("createRoom", { username: username, timestamp: Date.now(), socket_id: socket.id })
         socket.once("createRoom", data => {
-            if (data.status === "error") return toast.error("Ops.. error in the creation of the room.")
+            if (data.status === "error") return toast.error(data.message)
             setUsers(data.users)
             setKeyRoom(data.keyRoom)
             setPhase(1)
