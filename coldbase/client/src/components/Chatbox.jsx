@@ -4,11 +4,12 @@ import aes from "crypto-js/aes";
 import toast from "react-hot-toast";
 
 function Chatbox() {
-    const { contextKeyRoom, contextUsername, contextSocket, contextMessages, contextPhase } = useContext(coldbaseContext)
+    const { contextKeyRoom, contextUsername, contextSocket, contextMessages, contextPhase, contextSecret } = useContext(coldbaseContext)
     const [phase] = contextPhase
     const [keyRoom] = contextKeyRoom
     const [username] = contextUsername
     const [messages, setMessages] = contextMessages
+    const [secret] = contextSecret
     const socket = contextSocket
 
     const [message, setMessage] = useState("")
@@ -43,7 +44,7 @@ function Chatbox() {
                 onKeyPress={({ key }) => {
                     if (key === "Enter") {
                         if (message.length < 1) return toast.error("Write a message.")
-                        const encryptedMessage = aes.encrypt(message, "123").toString()
+                        const encryptedMessage = aes.encrypt(message, secret).toString()
                         socket.emit("newMessage", { username: username, socket_id: socket.id, message: encryptedMessage, keyRoom: keyRoom })
                         setMessages(state => [...state, { username: username, socket_id: socket.id, message: message, keyRoom: keyRoom }])
                         setMessage("")

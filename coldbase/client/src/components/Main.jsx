@@ -32,7 +32,6 @@ function Main() {
         socket.emit("joinRoom", { username: username, socket_id: socket.id, keyRoom: keyRoom })
         socket.once("joinRoom", data => {
             if (data.status === "error") return toast.error(data.message)
-            console.log(data)
             setUsers(data.users)
             setKeyRoom(data.keyRoom)
             setPhase(1)

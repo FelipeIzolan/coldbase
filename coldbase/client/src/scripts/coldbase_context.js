@@ -13,6 +13,7 @@ export const ColdbaseProvider = (props) => {
     const [username, setUsername] = useState("")
     const [users, setUsers] = useState([])
     const [messages, setMessages] = useState([])
+    const [secret, setSecret] = useState("")
 
     useEffect(() => {
         const socket = io("http://localhost:5000")
@@ -26,12 +27,6 @@ export const ColdbaseProvider = (props) => {
         socket.on("newUser", data => {
             setUsers(state => [...state, data])
             setMessages(state => [...state, { username: "coldbase(system)", message: `${data.username} (${data.socket_id}) joined on room.` }])
-        })
-
-        socket.on("newMessage", data => {
-            if (data.status === "error") return toast.error(data.message)
-            const decryptedMessage = aes.decrypt(data.message, "123").toString(Utf8)
-            setMessages(state => [...state, { username: data.username, socket_id: data.socket_id, message: decryptedMessage }])
         })
 
         socket.on("disconnectRoom", ({ status, leader }) => {
@@ -51,9 +46,23 @@ export const ColdbaseProvider = (props) => {
             toast(`${data.username} - Take a print from chat.`)
         })
 
+        fetch("/api/secret")
+            .then(res => res.text())
+            .then(hash => setSecret(hash))
+
         return () => socket.close()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    useEffect(() => {
+        if (!socket) return
+        socket.on("newMessage", data => {
+            if (data.status === "error") return toast.error(data.message)
+            const decryptedMessage = aes.decrypt(data.message, secret).toString(Utf8)
+            setMessages(state => [...state, { username: data.username, socket_id: data.socket_id, message: decryptedMessage }])
+        })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [secret])
 
     return (
         <coldbaseContext.Provider
@@ -63,6 +72,7 @@ export const ColdbaseProvider = (props) => {
                 contextUsername: [username, setUsername],
                 contextUsers: [users, setUsers],
                 contextMessages: [messages, setMessages],
+                contextSecret: [secret, setSecret],
                 contextSocket: socket
             }}
         >

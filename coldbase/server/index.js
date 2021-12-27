@@ -7,3 +7,4 @@ const server = app.listen(5000, () => console.log("Server running / PORT: " + 50
 const io = new Server(server, { cors: { origin: "http://localhost:3000" } })
 
 io.on("connection", socket => new ChatManager(socket, io))
+app.use("/api/secret", require("./routes/secret.route"))
