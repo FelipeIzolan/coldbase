@@ -30,7 +30,7 @@ export const ColdbaseProvider = (props) => {
 
         socket.on("newMessage", data => {
             if (data.status === "error") return toast.error(data.message)
-            const decryptedMessage = aes.decrypt(data.message, "createdByFelipeIzolan2021").toString(Utf8)
+            const decryptedMessage = aes.decrypt(data.message, "123").toString(Utf8)
             setMessages(state => [...state, { username: data.username, socket_id: data.socket_id, message: decryptedMessage }])
         })
 
@@ -43,8 +43,16 @@ export const ColdbaseProvider = (props) => {
             setMessages([])
             setPhase(0)
         })
-        
+
+        socket.on("userTakePrint", data => {
+            console.log(data)
+            if (data.status === "error") return toast("No one was warned, but don't do it again!!", { icon: "😡" })
+            if (data.socket_id === socket.id) return toast("All users were warned about the PrintScreen.", { icon: "😉" })
+            toast(`${data.username} - Take a print from chat.`)
+        })
+
         return () => socket.close()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

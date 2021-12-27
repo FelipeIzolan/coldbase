@@ -1,10 +1,7 @@
 function disconnectController(socket_id, roomsManager, io) {
     const room = roomsManager.rooms.find(room => room.users.some(user => user.socket_id === socket_id)) ||
                  roomsManager.rooms.find(room => room.leader === socket_id)
-
-    console.log("executou")
     if (!room) return
-    console.log("achou sala")
 
     if (room.leader === socket_id) {
         roomsManager.removeRoom(socket_id)

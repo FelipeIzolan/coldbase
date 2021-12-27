@@ -4,7 +4,8 @@ import aes from "crypto-js/aes";
 import toast from "react-hot-toast";
 
 function Chatbox() {
-    const { contextKeyRoom, contextUsername, contextSocket, contextMessages } = useContext(coldbaseContext)
+    const { contextKeyRoom, contextUsername, contextSocket, contextMessages, contextPhase } = useContext(coldbaseContext)
+    const [phase] = contextPhase
     const [keyRoom] = contextKeyRoom
     const [username] = contextUsername
     const [messages, setMessages] = contextMessages
@@ -17,6 +18,12 @@ function Chatbox() {
         if (!chatMessagesRef || !chatMessagesRef.current) return
         chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight
     }, [messages])
+
+    useEffect(() => {
+        if (phase === 1) { window.onkeyup = (e) => { if (e.key === "PrintScreen") socket.emit("userTakePrint", { username: username, socket_id: socket.id, keyRoom: keyRoom }) } }
+        return () => window.onkeyup = null
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="coldbase_chatbox">
@@ -36,7 +43,7 @@ function Chatbox() {
                 onKeyPress={({ key }) => {
                     if (key === "Enter") {
                         if (message.length < 1) return toast.error("Write a message.")
-                        const encryptedMessage = aes.encrypt(message, "createdByFelipeIzolan2021").toString()
+                        const encryptedMessage = aes.encrypt(message, "123").toString()
                         socket.emit("newMessage", { username: username, socket_id: socket.id, message: encryptedMessage, keyRoom: keyRoom })
                         setMessages(state => [...state, { username: username, socket_id: socket.id, message: message, keyRoom: keyRoom }])
                         setMessage("")
