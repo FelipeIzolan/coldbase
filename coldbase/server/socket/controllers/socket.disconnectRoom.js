@@ -8,8 +8,8 @@ function disconnectRoomController(data, roomsManager, socket, io) {
 
             if (room.leader === socket_id) {
                 roomsManager.removeRoom(socket_id)
-                io.leave(keyRoom)
                 socket.to(keyRoom).emit("disconnectRoom", { status: "success", leader: true })
+                socket.leave(keyRoom)
                 socket.emit("disconnectRoom", { status: "success" })
             } else {
                 roomsManager.removeUserFromRoom(keyRoom, socket_id)
@@ -20,3 +20,5 @@ function disconnectRoomController(data, roomsManager, socket, io) {
         })
         .catch(err => socket.emit("disconnectRoom", err))
 }
+
+module.exports = disconnectRoomController

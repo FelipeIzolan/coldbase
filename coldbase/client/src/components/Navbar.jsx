@@ -26,7 +26,7 @@ function Navbar() {
     } else if (phase === 1) {
         return (
             <nav className="coldbase_navbar">
-                <label className="coldbase_navbar_logo" style={{ backgroundImage: `url(${coldbase_logo})` }} />
+                <label className="coldbase_navbar_logo" onClick={disconnectRoom} style={{ backgroundImage: `url(${coldbase_logo})` }} />
                 <div className="coldbase_navbar_key">
                     {hide === false ? (<h5><strong>key</strong>: {keyRoom}</h5>) : (<h5><strong>key</strong>: censored</h5>)}
                     <input type="checkbox" onChange={e => setHide(e.target.checked)} />

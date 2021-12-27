@@ -3,7 +3,7 @@ class RoomsManager {
         this.rooms = []
     }
 
-    getRoom(keyRoom) { this.rooms.find(room => room.keyRoom === keyRoom) }
+    getRoom(keyRoom) { return this.rooms.find(room => room.keyRoom === keyRoom) }
 
     addRoom(room) { this.rooms.push(room) }
     addUserInRoom(keyRoom, user) {

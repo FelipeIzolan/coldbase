@@ -43,7 +43,7 @@ export const ColdbaseProvider = (props) => {
             setMessages([])
             setPhase(0)
         })
-
+        
         return () => socket.close()
     }, [])
 
