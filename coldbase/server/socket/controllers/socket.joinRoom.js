@@ -8,7 +8,7 @@ function joinRoomController(data, roomsManager, socket) {
 
             socket.join(keyRoom)
             socket.to(keyRoom).emit("newUser", { username: username, socket_id: socket_id })
-            socket.emit("joinRoom", { keyRoom: keyRoom, users: roomsManager.getUsers(keyRoom) })
+            socket.emit("joinRoom", { keyRoom: keyRoom, users: roomsManager.getRoom(keyRoom).users })
         })
         .catch(err => socket.emit("joinRoom", err))
 }
