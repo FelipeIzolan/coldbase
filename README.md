@@ -18,6 +18,7 @@ Back-end
 - A New encrypt and decrypt secret is generated every 1 hour.
 - When a user in room take a print ( via keyboard ), all users is warned.
 - When leader left from room, the room is deleted.
+- The Messages not is stored on server or on client.
 - More...
 ### CORS
 If you are going to build the client and serve it as a static file, don't forget to remove the CORS configuration.
