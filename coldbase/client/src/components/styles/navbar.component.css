@@ -3,7 +3,6 @@
     background: rgba(15, 22, 34, 0.4);
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 .coldbase_navbar_logo{
@@ -14,20 +13,7 @@
     height: 100px;
 }
 
-.coldbase_navbar_leave:hover{ background: #74a3e4; }
-.coldbase_navbar_leave:active{ background: #74a3e4; }
-.coldbase_navbar_leave{
-    margin-right: 50px;
-    font-size: 14px;
-    cursor: pointer;
-    color: white;
-    transform: scale(2, 1.6);
-    transition: 0.2s;
-    padding: 4px 6.5px 4px 6.5px;
-    border-radius: 50%;
-}
-
-.coldbase_navbar_key{ color: white; text-align: center; }
+.coldbase_navbar_key{ color: white; }
 .coldbase_navbar_key label{ 
     margin-left: 6px;
     font-size: small;
@@ -35,5 +21,6 @@
 }
 
 @media (max-width: 600px) {
+    .coldbase_navbar{ justify-content: center; }
     .coldbase_navbar_key{ display: none; }
 }

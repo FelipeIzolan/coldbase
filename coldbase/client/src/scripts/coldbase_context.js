@@ -29,6 +29,7 @@ export const ColdbaseProvider = (props) => {
         })
 
         socket.on("newMessage", data => {
+            if (data.status === "error") return toast.error(data.message)
             const decryptedMessage = aes.decrypt(data.message, "createdByFelipeIzolan2021").toString(Utf8)
             setMessages(state => [...state, { username: data.username, socket_id: data.socket_id, message: decryptedMessage }])
         })

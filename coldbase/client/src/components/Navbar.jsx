@@ -32,7 +32,6 @@ function Navbar() {
                     <input type="checkbox" onChange={e => setHide(e.target.checked)} />
                     <label>hide?</label>
                 </div>
-                <label className="coldbase_navbar_leave" onClick={disconnectRoom}>X</label>
             </nav >
         )
 

@@ -31,7 +31,8 @@ function Main() {
         if (keyRoom.length !== 40) return toast.error("Invalid key.")
         socket.emit("joinRoom", { username: username, socket_id: socket.id, keyRoom: keyRoom })
         socket.once("joinRoom", data => {
-            if (data.status === "error") return toast.error("Invalid key.")
+            console.log(data)
+            if (data.status === "error") return toast.error(data.message)
             setUsers(data.users)
             setKeyRoom(data.keyRoom)
             setPhase(1)
