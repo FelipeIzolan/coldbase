@@ -9,7 +9,6 @@ var secret = generateSecret()
 setInterval(() => secret = generateSecret(), 3600000) // 1 hour
 
 router.get("/", (req, res) => {
-    console.log(secret)
     return res.send(secret)
 })
 
