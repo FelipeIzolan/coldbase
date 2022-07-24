@@ -1,0 +1,46 @@
+.main-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container input[type="text"] {
+  padding: 6px 10px;
+  border-radius: 25px;
+  width: 16em;
+  margin: 4px;
+  background: white;
+}
+
+.main-button {
+  display: flex;
+  margin-top: 12px;
+  margin-bottom: 150px;
+}
+
+@media screen and (max-height: 500px) {
+  .main-button {
+    margin-bottom: 75px;
+  }
+}
+
+.main-button button {
+  cursor: pointer;
+  padding: 4px 16px;
+  font-size: small;
+  border: 1px var(--half-light) solid;
+  color: var(--half-light);
+  font-weight: 400;
+  font-family: "Space Mono";
+}
+
+.main-button button:hover {
+  background: var(--half-light);
+  color: var(--light);
+}
+
+.main-button button:first-child { border-top-left-radius: 10px; border-right-width: 0; }
+.main-button button:last-child { border-bottom-right-radius: 10px; }

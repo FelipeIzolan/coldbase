@@ -1,15 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
+:root {
+  --dark: #1F1F3A;
+  --half-dark: #31315E;
+  --normal: #363698;
+  --half-light: #5BC0BE;
+  --light: #FFFFFF;
+}
+
 *{
   margin: 0;
   padding: 0;
+  box-sizing: "content-box";
+  transition: 0.2s;
 }
 
 body {
-  background: rgb(30, 30, 40);
+  background: var(--dark);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+input, button, hr {
+  background: none;
+  border: none;
+}
+
 ul{ list-style: none; }
 input:focus{ outline: none; }
+
+.coldbase-gradient {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 4px;
+  background: linear-gradient(270deg, #5a5aff, #8ba7ff, #b0fffd);
+  background-size: 600% 600%;
+}

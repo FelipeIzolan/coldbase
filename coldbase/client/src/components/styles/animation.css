@@ -1,0 +1,27 @@
+@keyframes showUp {
+  from { 
+    transform: scale(0.5); 
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes backgroundScroll {
+  0%{ background-position:0% 50% }
+  50%{ background-position:100% 50% }
+  100%{ background-position:0% 50% }
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.backgroundScroll { animation: backgroundScroll 6s ease infinite; }
+.showUp { animation: showUp 1s both; }
+.blink { animation: blink 0.6s both infinite; }
